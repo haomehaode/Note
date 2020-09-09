@@ -1,0 +1,130 @@
+创建仓库
+    git init <repository>
+添加文件
+    git add <file>
+    git add .
+    git commit -m <message>
+查看状态
+    git status
+查看不同
+    git diff <file>
+查看历史版本
+    git log
+    git log --pretty=oneline
+回退版本
+    git log
+    git reset --hard HEAD^
+    git reset --hard <commit_id>
+重返未来
+    git reflog
+    git reset --hard <commit_id>
+撤销修改
+    git checkout -- <file>
+    git reset HEAD <file>
+删除文件
+    git rm <file>
+关联仓库
+    git remote add origin git@server-name:path/repo-name.git
+推送修改
+    git push origin master
+克隆仓库
+    git clone URL
+创建分支与合并
+    查看分支
+        git branch
+    创建分支
+        git branch <name>
+    切换分支
+        git checkout <name> 或者 git switch <name>
+    创建 + 切换分支
+        git checkout -b <name> 或者 git switch -c <name>
+    合并某分支到当前分支
+        git merge <name>
+    删除分支    
+        git branch -d <name>
+分支合并冲突
+    打开冲突文件进行修改
+    修改后提交  
+        git add <file> 
+        git commit -m "message"
+    命令可以看到分支合并图
+        git log --graph
+通常合并分支时，如果可能，Git会用Fast forward模式，但这种模式下，删除分支后，会丢掉分支信息
+    如果要强制禁用Fast forward模式，Git就会在merge时生成一个新的commit，这样，从分支历史上就可以看出分支信息。
+    git merge --no-ff -m "message" <branch-name>
+    合并分支时，加上--no-ff参数就可以用普通模式合并，合并后的历史有分支，能看出来曾经做过合并，而fast forward合并就看不出来曾经做过合并。
+分支策略
+    在实际开发中，我们应该按照几个基本原则进行分支管理：
+    首先，master分支应该是非常稳定的，也就是仅用来发布新版本，平时不能在上面干活；
+    其次，干活都在dev分支上，也就是说，dev分支是不稳定的，到某个时候，比如1.0版本发布时，再把dev分支合并到master上，在master分支发布1.0版本；
+    最后，你和你的小伙伴们每个人都在dev分支上干活，每个人都有自己的分支，时不时地往dev分支上合并就可以了。
+临时修改问题
+    储藏现场
+        git stash
+    查看工作现场储藏
+        git stash list
+    现场恢复，stash内容不删除
+        git stash apply
+    删除现场
+        git stash drop
+    恢复现场同时删除stash
+        git stash pop
+分支复制
+    git cherry-pick <commit-id>
+Feature分支
+    添加一个新功能时，最好新建一个feature分支，在上面开发，完成后，合并，最后，删除该feature分支
+    有被合并过的分支，强行删除
+        git branch -D <name>
+多人协作
+    首先，可以试图用 git push origin <branch-name> 推送自己的修改
+    如果推送失败，则因为远程分支比你的本地更新，需要先用 git pull 抓取远程仓库的新提交然后试图合并；
+    如果合并有冲突，则解决冲突，并在本地提交；
+    没有冲突或者解决掉冲突后，再用git push origin <branch-name>推送就能成功！
+    如果git pull提示no tracking information，则说明本地分支和远程分支的链接关系没有创建，用命令git branch --set-upstream-to <branch-name> origin/<branch-name>
+    查看远程库信息
+        git remote -v
+    从本地推送分支
+        git push origin branch-name
+    抓取远程的新提交
+        git pull
+    在本地创建和远程分支对应的分支，本地和远程分支的名称最好一致
+        git checkout -b branch-name origin/branch-name
+    建立本地分支和远程分支的关联
+        git branch --set-upstream branch-name origin/branch-name
+标签管理
+    创建标签
+        git tag <tagname>
+    给历史提交打标签
+        git tag <tagname> <commit_id>
+    指定标签信息
+        git tag -a <tagname> -m "message"
+    查看所有标签
+        git tag
+    查看标签信息
+        git show <tagname>
+    推送一个本地标签
+        git push origin <tagname>
+    推送全部未推送过的本地标签
+        git push origin --tags
+    删除一个本地标签
+        git tag -d <tagname>
+    删除一个远程标签
+        git push origin :refs/tags/<tagname>
+搭建Git服务器
+    前期准备
+        Linux服务器，Ubuntu或Debia   sudo权限用户账号
+    安装git 
+        sudo apt-get install git
+    创建一个git用户，用来运行git服务
+        sudo adduser git
+    创建证书登录
+        收集所有需要登录的用户的公钥，就是他们自己的id_rsa.pub文件，把所有公钥导入到/home/git/.ssh/authorized_keys文件里，一行一个
+    初始化Git仓库
+        先选定一个目录作为Git仓库，假定是/srv/sample.git，在/srv目录下输入命令：sudo git init --bare sample.git
+    禁用shell登录
+        出于安全考虑，第二步创建的git用户不允许登录shell，这可以通过编辑/etc/passwd文件完成。找到类似下面的一行：
+            git:x:1001:1001:,,,:/home/git:/bin/bash 改为：git:x:1001:1001:,,,:/home/git:/usr/bin/git-shell
+        这样，git用户可以正常通过ssh使用git，但无法登录shell，因为我们为git用户指定的git-shell每次一登录就自动退出。
+    克隆远程仓库
+        通过git clone命令克隆远程仓库了，在各自的电脑上运行
+    要方便管理公钥，用Gitosis；要像SVN那样变态地控制权限，用Gitolite

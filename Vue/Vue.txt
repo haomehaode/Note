@@ -1,0 +1,14 @@
+Vue基础
+    语法模板
+        {{msg}} 
+            绑定的数据对象上 msg 发生了改变，插值处的内容都会更新
+        v-once  
+            数据改变时，插值处的内容不会更新
+        v-html 
+            输出真正的 HTML
+        v-bind
+            将 Mustache 语法绑定在 HTML attribute 
+        缩写 
+            v-on == @       v-bind == ：
+    计算属性
+        

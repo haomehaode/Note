@@ -1,0 +1,77 @@
+创建项目 
+    vue create name
+选择模板
+  ? Check the features needed for your project:
+    (*) Choose Vue version
+    (*) Babel
+    ( ) TypeScript
+    ( ) Progressive Web App (PWA) Support
+    (*) Router
+    (*) Vuex
+    ( ) CSS Pre-processors
+    (*) Linter / Formatter
+    ( ) Unit Testing
+    ( ) E2E Testing
+更改浏览器默认图标
+    public/favicon.ico
+删除默认组件
+    Home.vue    About.vue   HelloWorld.vue
+修改App.vue
+    <template>
+      <div id="app"></div>
+    </template>
+    <script>
+    export default {
+     name: 'App' 
+    }
+    </script>
+    <style lang="less"></style>
+修改router/index.js
+    import { createRouter, createWebHistory } from 'vue-router'
+    const routes = []
+    const router = createRouter({
+      history: createWebHistory(process.env.BASE_URL),
+      routes
+    })
+    export default router
+导入初始化CSS
+    App.vue  @import "assets/css/base.css";
+添加vue.config.js文件
+    module.exports = {
+      configureWebpack:{
+        resolve:{
+          alias:{
+            assets: '@/assets',
+            common: '@/common',
+            components: '@/components',
+            network: '@/network',
+            views: '@/views'
+          }
+        }
+      }
+    }
+修改.editorconfig
+    root = true
+    [*]
+    charset = utf-8
+    indent_style = space
+    indent_size = 2
+    end_of_line = lf
+    insert_final_newline = true
+    trim_trailing_whitespace = true
+添加网络请求axios
+    添加axios
+        npm install axios --save
+    添加network文件夹并使用request.js
+        network/request.js
+    不同界面添加不同网络请求js 
+        eg:home.js
+    vue页面中使用
+        import { getHomeMultidata, getHomeGoods } from "network/home";
+        getHomeMultidata() {
+          getHomeMultidata().then(res => {
+            console.log(res);
+            this.banners = res.data.banner.list;
+            this.recommends = res.data.recommend.list;
+          });
+        }
