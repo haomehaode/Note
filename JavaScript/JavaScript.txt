@@ -1,0 +1,170 @@
+JS文件使用
+    内部：
+        把脚本置于 <body> 元素的底部，可改善显示速度，因为脚本编译会拖慢显示。
+    外部：
+        在 <script> 标签的 src (source) 属性中设置脚本的名称：
+            <script src="myScript.js"></script>
+JS输出
+    使用 window.alert() 写入警告框
+    使用 document.write() 写入 HTML 输出
+    使用 innerHTML 写入 HTML 元素     document.getElementById("demo").innerHTML = 5 + 6;
+    使用 console.log() 写入浏览器控制台
+注释
+    单行注释    单行注释以 // 开头
+    多行注释    以 /* 开头，以 */ 结尾
+变量命名法则
+    使用以小写字母开头的驼峰大小写：firstName, lastName, masterCard, interCity
+JS数据类型   typeof()
+    字符串      var length = 7;  
+    数值        var lastName = "Gates";    
+    布尔值      var  isShow = true;
+    数组        var cars = ["Porsche", "Volvo", "BMW"];
+    对象        var person  = {firstName:"Bill", lastName:"Gates"};  
+JS对象
+    var person = {
+      firstName: "Bill",
+      lastName : "Gates",
+      id       : 678,
+      fullName : function() {
+        return this.firstName + " " + this.lastName;
+      }
+    };
+JS事件
+    onchange	    HTML 元素已被改变
+    onclick	        用户点击了 HTML 元素
+    onmouseover	    用户把鼠标移动到 HTML 元素上
+    onmouseout	    用户把鼠标移开 HTML 元素
+    onkeydown	    用户按下键盘按键
+    onload	        浏览器已经完成页面加载
+JS字符串方法
+    length          返回字符串的长度
+    indexOf()       返回字符串中指定文本首次出现的索引（位置）
+    lastIndexOf()   返回指定文本在字符串中最后一次出现的索引
+    search()        方法搜索特定值的字符串，并返回匹配的位置
+    replace()       方法用另一个值替换在字符串中指定的值
+    toUpperCase()   把字符串转换为大写
+    toLowerCase()   把字符串转换为小写
+    concat()        连接两个或多个字符串
+    trim()          方法删除字符串两端的空白符
+    split()         将字符串转换为数组
+    slice(start, end)           提取部分字符串
+    substring(start, end)       提取部分字符串
+    substr(start, length)       提取部分字符串
+    charAt(position)            提取字符串字符
+    charCodeAt(position)        提取字符串字符
+JS数字方法
+    toString()          以字符串返回数值
+    toExponential()     返回字符串值，它包含已被四舍五入并使用指数计数法的数字
+    toFixed()           返回字符串值，它包含了指定位数小数的数字
+    toPrecision()       返回字符串值，它包含了指定长度的数字
+    valueOf()           以数值返回数值
+    Number()	        返回数字，由其参数转换而来
+    parseFloat()	    解析其参数并返回浮点数
+    parseInt()	        解析其参数并返回整数
+    MAX_VALUE	        返回 JavaScript 中可能的最大数
+    MIN_VALUE	        返回 JavaScript 中可能的最小数
+    NEGATIVE_INFINITY	表示负的无穷大（溢出返回）
+    NaN	                表示非数字值（"Not-a-Number"）
+    POSITIVE_INFINITY	表示无穷大（溢出返回）
+JS数组方法
+    var cars = ["Saab", "Volvo", "BMW"];
+    toString()          把数组转换为数组值（逗号分隔）的字符串
+    join()              可将所有数组元素结合为一个字符串
+    pop()               从数组中删除最后一个元素
+    push()              （在数组结尾处）向数组添加一个新的元素
+    shift()             删除首个数组元素，并把所有其他元素“位移”到更低的索引
+    unshift()           （在开头）向数组添加新元素，并“反向位移”旧元素
+    splice(a,b,..arr)   拼接数组    第一个参数 a 定义了应添加新元素的位置（拼接） 第二个参数 b 定义应删除多少元素  其余参数 ..arr 定义要添加的新元素
+    concat()            通过合并（连接）现有数组来创建一个新数组
+    slice(start,end)    用数组的某个片段切出新数组
+    sort()              以字母顺序对数组进行排序
+    reverse()           反转数组中的元素
+    forEach((value,index,array)=>{})                 为每个数组元素调用一次函数（回调函数）
+    map((value,index,array)=>{index})                通过对每个数组元素执行函数来创建新数组
+    filter((value,index,array)=>{index})             创建一个包含通过测试的数组元素的新数组
+    reduce((count,value,index,array)=>{index})       在每个数组元素上运行函数，以生成（减少它）单个值                     
+    reduceRight((count,value,index,array)=>{index})  在每个数组元素上运行函数，以生成（减少它）单个值; 从左到右工作
+    every((value,index,array)=>{index})              检查所有数组值是否通过测试
+    some((value,index,array)=>{index})               检查某些数组值是否通过了测试
+    indexOf()                                        在数组中搜索元素值并返回其位置
+    lastIndexOf                                      从数组结尾开始搜索元素值并返回其位置
+    find()                                           返回通过测试函数的第一个数组元素的值
+    findIndex((value,index,array)=>{index})          返回通过测试函数的第一个数组元素的索引
+日期获取方法
+    getDate()	        以数值返回天（1-31）
+    getDay()	        以数值获取周名（0-6）
+    getFullYear()	    获取四位的年（yyyy）
+    getHours()	        获取小时（0-23）
+    getMilliseconds()	获取毫秒（0-999）
+    getMinutes()	    获取分（0-59）
+    getMonth()	        获取月（0-11）
+    getSeconds()	    获取秒（0-59）
+    getTime()       	获取时间（从 1970 年 1 月 1 日至今）
+日期设置方法
+    setDate()	        以数值（1-31）设置日
+    setFullYear()	    设置年（可选月和日）
+    setHours()	        设置小时（0-23）
+    setMilliseconds()	设置毫秒（0-999）
+    setMinutes()	    设置分（0-59）
+    setMonth()	        设置月（0-11）
+    setSeconds()	    设置秒（0-59）
+    setTime()	        设置时间（从 1970 年 1 月 1 日至今的毫秒数）
+数学方法
+    abs(x)	            返回 x 的绝对值
+    acos(x)	            返回 x 的反余弦值，以弧度计
+    asin(x)	            返回 x 的反正弦值，以弧度计
+    atan(x)	            以介于 -PI/2 与 PI/2 弧度之间的数值来返回 x 的反正切值。
+    atan2(y,x)	        返回从 x 轴到点 (x,y) 的角度
+    ceil(x)	            对 x 进行上舍入
+    cos(x)	            返回 x 的余弦
+    exp(x)	            返回 Ex 的值
+    floor(x)	        对 x 进行下舍入
+    log(x)	            返回 x 的自然对数（底为e）
+    max(x,y,z,...,n)	返回最高值
+    min(x,y,z,...,n)	返回最低值
+    pow(x,y)	        返回 x 的 y 次幂
+    random()	        返回 0 ~ 1 之间的随机数
+    round(x)	        把 x 四舍五入为最接近的整数
+    sin(x)	            返回 x（x 以角度计）的正弦
+    sqrt(x)	            返回 x 的平方根
+    tan(x)	            返回角的正切
+JS表单
+    输入属性
+        disabled	规定 input 元素应该被禁用
+        max	        规定 input 元素的最大值
+        min	        规定 input 元素的最小值
+        pattern	    规定 input 元素的值模式
+        required	规定输入字段需要某个元素
+        type	    规定 input 元素的类型
+    约束验证CSS伪类选择器
+        :disabled	选择设置了 "disabled" 属性的 input 元素
+        :invalid	选择带有无效值的 input 元素
+        :optional	选择未设置 "required" 属性的 input 元素
+        :required	选择设置了 "required" 属性的 input 元素
+        :valid	    选择带有有效值的 input 元素
+    约束验证 DOM 方法
+        checkValidity()	    返回 true，如果 input 元素包含有效数据
+        setCustomValidity()	设置 input 元素的 validationMessage 属性
+    约束验证 DOM 属性
+        validity	        包含与 input 元素的合法性相关的布尔属性
+        validationMessage	包含当 validity 为 false 时浏览器显示的消息
+        willValidate	    指示是否验证 input 元素
+    合法性属性 validity 
+        customError	    设置为 true，如果设置自定义的合法性消息
+        patternMismatch	设置为 true，如果元素值不匹配其 pattern 属性
+        rangeOverflow	设置为 true，如果元素值大约其 max 属性
+        rangeUnderflow	设置为 true，如果元素值小于其 min 属性
+        stepMismatch	当字段拥有 step 属性，且输入的 value 值不符合设定的间隔值时，该属性值为 true
+        tooLong	        设置为 true，如果元素值超过了其 maxLength 属性
+        typeMismatch	当字段的 type 是 email 或者 url 但输入的值不是正确的类型时，属性值为 true
+        valueMissing	设置为 true，如果元素（包含 required）没有值
+        valid	        设置为 true，如果元素值是有效的
+JS对象  
+    定义
+        var person = {firstName:"Bill", lastName:"Gates", age:62, eyeColor:"blue"}
+    添加属性
+        person.nationality = "English";
+    删除属性
+        delete person.age; 
+JS函数
+    
