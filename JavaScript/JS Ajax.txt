@@ -1,0 +1,73 @@
+创建 XMLHttpRequest对象 
+    创建 XMLHttpRequest 的语法是：
+        variable = new XMLHttpRequest();
+    老版本的 Internet Explorer（IE5 和 IE6）使用 ActiveX 对象：
+        variable = new ActiveXObject("Microsoft.XMLHTTP");
+跨域访问
+    出于安全原因，现代浏览器不允许跨域访问。这意味着尝试加载的网页和 XML 文件都必须位于相同服务器上。
+XMLHttpRequest 对象方法
+    new XMLHttpRequest()	                创建新的 XMLHttpRequest 对象
+    abort()	                                取消当前请求
+    getAllResponseHeaders()	                返回头部信息
+    getResponseHeader()	                    返回特定的头部信息
+    open(method, url, async, user, psw)	    规定请求
+                                                method：请求类型 GET 或 POST
+                                                url：文件位置
+                                                async：true（异步）或 false（同步）
+                                                user：可选的用户名称
+                                                psw：可选的密码
+    send()	                                将请求发送到服务器，用于 GET 请求
+    send(string)	                        将请求发送到服务器，用于 POST 请求
+    setRequestHeader()	                    向要发送的报头添加标签/值对
+XMLHttpRequest 对象属性
+    onreadystatechange	                    定义当 readyState 属性发生变化时被调用的函数
+    readyState	                            保存 XMLHttpRequest 的状态
+                                                0：请求未初始化
+                                                1：服务器连接已建立
+                                                2：请求已收到
+                                                3：正在处理请求
+                                                4：请求已完成且响应已就绪
+    responseText	                        以字符串返回响应数据
+    responseXML	                            以 XML 数据返回响应数据
+    status	                                返回请求的状态号
+                                                200: "OK"
+                                                403: "Forbidden"
+                                                404: "Not Found"
+                                                如需完整列表请访问 Http 消息参考手册
+    statusText	                            返回状态文本（比如 "OK" 或 "Not Found"）
+AJAX实例
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            xmlDoc = this.responseXML;
+            document.getElementById("demo").innerHTML =this.responseText;
+            document.getElementById("demo").innerHTML = this.getAllResponseHeaders();
+            document.getElementById("demo").innerHTML = this.getResponseHeader("Last-Modified");
+       }
+    };
+    xhttp.open("GET", "ajax_info.txt", true);
+    xhttp.send(); 
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+            document.getElementById("demo").innerHTML = this.responseText;
+        }
+    };
+    xhttp.open("POST", "/demo/demo_post2.asp", true);
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send("fname=Bill&lname=Gates");
+
+
+    function(){
+		var xhr =new XMLHttpRequest();                                                          //创建异步对象,这里的()别忘记了
+		xhr.open("post","xxx.php");                                                             //设置请求行：请求的方式(post/get)，请求的url   (get:会在网址栏中出现结果，易于测试但安全性不高。post无这种问题)
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");               //请求头，在post请求方式中必须有并且特定这种写法
+		xhr.onreadystatechange=function(){                                                      //回调函数，还有一种onload写法 //xhr.onload=function(){}
+			if(this.readyState==4&&this.status==200){                                           //状态等于4时响应完成，但页面404时仍可接收到响应，所以这里要status(页面状态)==200，既页面正常才给接收响应
+				console.log(this.readyState);   //值是4
+				console.log(this.responseText);
+			}
+		};                                                                                      //(请求主体)发送请求，post请求方式的请求信息写在请求主体里，就是这里(这里已经写了)
+		xhr.send("name=heihei&skill=haha&age=15&sex=man");                                      //get请求方式的请求信息写在请求行里，如 xhr.open("get","xxx.php?name=heihei&skill=haha&age=15&sex=man")                                                                                 
+	}
